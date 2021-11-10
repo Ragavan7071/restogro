@@ -6,7 +6,8 @@ class portfolio{
 	public:
 		void get();
 		void view();
-		void clear_balance();
+		void clear_balance_directly();
+		void balance_settlement();
 			
 };
 void portfolio::get()
@@ -47,7 +48,7 @@ void portfolio::view()
 	else if(user1==0&&user2==0)
 	cout<<"no settelements"<<char(10);
 }
-void portfolio::clear_balance()
+void portfolio::clear_balance_directly()
 {
 if(user1>=user2)
 {
@@ -60,9 +61,34 @@ if(user2>=user1)
 	user2=user2-user2;
 }
 }
+void portfolio::balance_settlement()
+{
+	int temp;
+	long int am;
+	cout<<"payment details....."<<char(10);
+	cout<<"now the balance is..."<<char(10);
+	view();
+	l1:cout<<"from user:";
+	cin>>temp;
+	if(temp!=1&&temp!=2)
+	{
+		cout<<"enter valid user..";
+		goto l1;
+	}
+	cout<<"amount:";
+	cin>>am;
+	if(temp==1)
+	{
+		user1=user1+am;
+	}
+	if(temp==2)
+	{
+		user2=user2+am;
+	}
+}
 int main()
 {
-	int choice;
+	int choice,x;
 	portfolio expense;
 	cout<<"there are two users in this statement user 1 and user2.."<<char(10);
 	while(1)
@@ -75,9 +101,21 @@ int main()
 		expense.view();
 		if(choice==3)
 		{
-			expense.clear_balance();
-			cout<<"now the balance is:"<<char(10);
-			expense.view();
+			cout<<"1.clear balance directly               2.payment settlement "<<char(10);
+			cin>>x;
+			if(x==1)
+			{
+				expense.clear_balance_directly();
+				cout<<"now the balance is:"<<char(10);
+				expense.view();
+			}
+			if(x==2)
+			{
+				expense.balance_settlement();
+				cout<<"now the balance is:"<<char(10);
+				expense.view();
+				
+			}
 		}
 		if(choice==4)
 		break;
